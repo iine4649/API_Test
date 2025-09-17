@@ -21,7 +21,6 @@ def get_quote():
         response.raise_for_status()  
         data = response.json()
         
-        # ターミナルにクォートを表示
         quote = data[0]['quote']
         author = data[0]['author']
         print("\n" + "="*50)
@@ -42,22 +41,18 @@ def get_quote():
 
 @app.route("/search-quotes")
 def search_quotes():
-    """クエリパラメータでクォートを検索"""
     author = request.args.get('author', '')
     limit = request.args.get('limit', '1')
     
     try:
-        # 複数のクォートを取得
         response = requests.get(f"https://api.breakingbadquotes.xyz/v1/quotes/{limit}")
         response.raise_for_status()
         data = response.json()
         
-        # 作者でフィルタリング
         if author:
             filtered_data = [quote for quote in data if author.lower() in quote['author'].lower()]
             data = filtered_data
         
-        # ターミナルに表示
         print(f"\n🔍 Search Results (Author: {author or 'All'}, Limit: {limit}):")
         for i, quote_data in enumerate(data, 1):
             print(f"{i}. \"{quote_data['quote']}\" - {quote_data['author']}")
@@ -76,7 +71,6 @@ def search_quotes():
 
 @app.route("/random-fact")
 def random_fact():
-    """ランダムな事実を取得"""
     try:
         response = requests.get("https://uselessfacts.jsph.pl/random.json?language=en")
         response.raise_for_status()
@@ -98,14 +92,12 @@ def random_fact():
 
 @app.route("/submit-form", methods=['GET', 'POST'])
 def submit_form():
-    """フォーム処理"""
     if request.method == 'POST':
         name = request.form.get('name', '')
         favorite_character = request.form.get('character', '')
         message = request.form.get('message', '')
         
-        # ターミナルに表示
-        print(f"\n📝 Form Submission:")
+        print(f"Form Submission:")
         print(f"Name: {name}")
         print(f"Favorite Character: {favorite_character}")
         print(f"Message: {message}")
@@ -120,7 +112,7 @@ def submit_form():
 
 @app.route("/form-result")
 def form_result():
-    """フォーム結果表示"""
+    
     name = request.args.get('name', '')
     character = request.args.get('character', '')
     message = request.args.get('message', '')
@@ -132,28 +124,27 @@ def form_result():
 
 @app.route("/api-info")
 def api_info():
-    """API情報を表示"""
     apis = [
         {
             "name": "Breaking Bad Quotes",
             "url": "https://api.breakingbadquotes.xyz/v1/quotes",
-            "description": "Breaking Badの名言を取得"
+            "description": ""
         },
         {
             "name": "Useless Facts",
             "url": "https://uselessfacts.jsph.pl/random.json",
-            "description": "ランダムな面白い事実を取得"
+            "description": ""
         }
     ]
     
     return jsonify({
         "available_apis": apis,
         "endpoints": [
-            "/get-quote - Breaking Badの名言を取得",
-            "/search-quotes?author=Walter&limit=3 - 特定の作者の名言を検索",
-            "/random-fact - ランダムな事実を取得",
-            "/submit-form - フォーム送信",
-            "/api-info - このAPI情報"
+            "/get-quote",
+            "/search-quotes?author=Walter&limit=3",
+            "/random-fact",
+            "/submit-form",
+            "/api-info"
         ]
     })
 
