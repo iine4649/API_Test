@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Result - Flask API App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .result-section {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+        .result-section h3 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+        .result-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        .result-label {
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 5px;
+        }
+        .result-value {
+            font-size: 1.1em;
+            margin-left: 10px;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px 5px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .button.secondary {
+            background: #2196F3;
+        }
+        .button.secondary:hover {
+            background: #1976D2;
+        }
+        .success-message {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✅ Form Submitted Successfully!</h1>
+        
+        <div class="success-message">
+            🎉 フォームが正常に送信されました！
+        </div>
+
+        <div class="result-section">
+            <h3>📋 Submitted Information</h3>
+            
+            <div class="result-item">
+                <div class="result-label">お名前:</div>
+                <div class="result-value">{{ name }}</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">好きなキャラクター:</div>
+                <div class="result-value">{{ character }}</div>
+            </div>
+
+            {% if message %}
+            <div class="result-item">
+                <div class="result-label">メッセージ:</div>
+                <div class="result-value">{{ message }}</div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="result-section">
+            <h3>🎬 Breaking Bad Fun Facts</h3>
+            <p>あなたの好きなキャラクター「{{ character }}」について、もっと知りたいですか？</p>
+            <a href="/search-quotes?author={{ character.split()[0] }}&limit=2" class="button">
+                {{ character }}の名言を検索
+            </a>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="/submit-form" class="button secondary">新しいフォームを送信</a>
+            <a href="/" class="button">ホームに戻る</a>
+        </div>
+    </div>
+</body>
+</html>

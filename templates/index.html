@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask API App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .api-section {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+        .api-section h3 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px 5px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .button.secondary {
+            background: #2196F3;
+        }
+        .button.secondary:hover {
+            background: #1976D2;
+        }
+        .form-link {
+            background: #FF9800;
+        }
+        .form-link:hover {
+            background: #F57C00;
+        }
+        .endpoint {
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            font-family: monospace;
+        }
+        .description {
+            font-style: italic;
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Flask API App</h1>
+        <p style="text-align: center; font-size: 1.2em; margin-bottom: 40px;">
+            Breaking Badの名言とランダムな事実を楽しもう！
+        </p>
+
+        <div class="api-section">
+            <h3>📝 Breaking Bad Quotes</h3>
+            <p class="description">Breaking Badの有名な名言を取得できます</p>
+            <a href="/get-quote" class="button">名言を取得</a>
+            <a href="/search-quotes?author=Walter&limit=3" class="button secondary">Walterの名言を検索</a>
+            <a href="/search-quotes?author=Jesse&limit=2" class="button secondary">Jesseの名言を検索</a>
+        </div>
+
+        <div class="api-section">
+            <h3>📚 Random Facts</h3>
+            <p class="description">面白いランダムな事実を取得できます</p>
+            <a href="/random-fact" class="button">ランダムな事実を取得</a>
+        </div>
+
+        <div class="api-section">
+            <h3>📋 User Form</h3>
+            <p class="description">あなたの好きなキャラクターについて教えてください</p>
+            <a href="/submit-form" class="button form-link">フォームを開く</a>
+        </div>
+
+        <div class="api-section">
+            <h3>🔧 API Information</h3>
+            <p class="description">利用可能なAPIエンドポイントの情報</p>
+            <a href="/api-info" class="button secondary">API情報を表示</a>
+        </div>
+
+        <div class="api-section">
+            <h3>📖 Available Endpoints</h3>
+            <div class="endpoint">GET /get-quote</div>
+            <div class="endpoint">GET /search-quotes?author=Walter&limit=3</div>
+            <div class="endpoint">GET /random-fact</div>
+            <div class="endpoint">GET /submit-form</div>
+            <div class="endpoint">GET /api-info</div>
+        </div>
+    </div>
+</body>
+</html>
